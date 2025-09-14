@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page - BREW</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/catagory.css">
+    <link rel="stylesheet" href="css/aboutus.css">
+    <link rel="stylesheet" href="css/news.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <div><a href="test.html" class="logo">BREW</a></div>
+        </div>
+
+
+
+        <div class="navbar-right">
+            <div class="search-bar">
+                <input type="text" placeholder="Bạn tìm kiếm gì...">
+            </div>
+
+            <a href="login.html"> <img class="user-icon" src="img/usc.jpg" alt="usericon">Log In</a>
+            <a href="cart.html">Cart</a>
+        </div>
+    </div>
+
+    <section class="menu-bar">
+        <nav>
+            <ul>
+                <li><a href="#">SHOP</a></li>
+                <li><a href="about.html">ABOUT US</a></li>
+                <li><a href="contact.html">STORE & CONTACT</a></li>
+                <li><a href="news.html">NEWS</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <section class="banner">
+        <div class="banner-slides">
+            <div class="banner-slide" style="background-image: url('slide1.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('slide2.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('slide3.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('vl.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('vq.jpg');"></div>
+            <div class="banner-slide" style="background-image: url('vw.jpg');"></div>
+        </div>
+        <div class="banner-indicators"></div>
+    </section>
+
+    <section class="category-grid">
+        <a href="sofa.html " class="grid-item large">
+            <img src="img/sofa.jpg" alt="Sofa">
+            <span class="label">SOFA</span>
+        </a>
+
+        <div class="right-grid">
+            <a href="/shop?category=dining" class="grid-item small">
+                <img src="img/ss.jpg" alt="Bàn ăn">
+                <span class="label">BÀN ĂN</span>
+            </a>
+            <a href="bed.html" class="grid-item small">
+                <img src="img/da.jpg" alt="Giường">
+                <span class="label">GIƯỜNG</span>
+            </a>
+            <a href="/shop?category=armchair" class="grid-item small">
+                <img src="img/aa.jpg" alt="Ghế bành">
+                <span class="label">ARMCHAIR</span>
+            </a>
+            <a href="chair.html" class="grid-item small">
+                <img src="img/xx.jpg" alt="Ghế ăn">
+                <span class="label">GHẾ ĂN</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="product-section">
+        <div class="section-header">
+            <h2>NEW ARRIVALS</h2>
+            <a href="shop.html" class="view-all">Xem tất cả</a>
+        </div>
+        <div class="slider-container">
+            <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-wrapper">
+                <div class="slider">
+                    <div class="product-card">
+                        <a href="bed3.html" class="product">
+                            <img src="img/bed31.avif" alt="Bed">
+                            <div class="content-card">
+                                <p>IKEA</p>
+                                <div class="description">SONGESAND</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="product-card">
+                        <a href="chair3.html" class="product">
+                            <img src="img/chair31.avif" alt="Chair">
+                            <div class="content-card">
+                                <p>IKEA</p>
+                                <div class="description">STEFAN</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="product-card" data-link="sp3.html">
+                        <a href="bed1.html" class="product">
+                            <img src="img/bed11.avif" alt="Bed">
+                            <div class="content-card">
+                                <p>IKEA</p>
+                                <div class="description">IDANÄS</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="product-card" data-link="sp4.html">
+                        <a href="chair1.html" class="product">
+                            <img src="img/chair11.avif" alt="Chair">
+                            <div class="content-card">
+                                <p>IKEA</p>
+                                <div class="description">NORDVIKEN</div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <section class="inspiration-section">
+        <div class="section-header">
+            <h2>NEWS</h2>
+            <a href="news.html" class="view-all">Xem tất cả</a>
+        </div>
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                <div class="slider">
+                    <div class="inspiration-card">
+                        <a href="news1.html" class="card">
+                            <div class="container-news">
+                                <div class="thumbnail">
+                                    <img src="img/thumb1.png" alt="thumb1">
+                                    <div class="content-card">
+                                        <p>Cẩm Nang Thiết Kế Nội Thất Phòng Khách: 5 Cách Thông Dụng Xử Lý Mùi Cho Sofa Da</p>
+                                        <div class="description">Sofa da thật là một sản phẩm cao cấp dùng thiết kế nội thất phòng khách. Nhưng qua quá trình sử dụng, sản phẩm này có thể xuất hiện mùi đặc trưng khó chịu. Sofa cao cấp không chỉ là một món đồ sử dụng thiết kế...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="inspiration-card">
+                        <a href="news3.html" class="card">
+                            <div class="container-news">
+                                <div class="thumbnail">
+                                    <img src="img/lp.webp" alt="thumb1">
+                                    <div class="content-card">
+                                        <p>Nội thất phong cách Bắc Âu - khi cảm xúc và sự sáng tạo lên ngôi</p>
+                                        <div class="description">Nội thất phong cách Bắc Âu (Scandinavian) trong một số quốc gia như Đan Mạch, Thụy Điển, Na Uy, Iceland, Phần Lan hay Quần đảo Faroe được coi là một nền văn hóa. Tại các nơi này thì sự đơn giản tuy hữu hạn...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="inspiration-card">
+                        <a href="news2.html" class="card">
+                            <div class="container-news">
+                                <div class="thumbnail">
+                                    <img src="img/lo.webp" alt="thumb1">
+                                    <div class="content-card">
+                                        <p>Phòng khách sẽ trở nên thú vị nếu bạn tránh những sai lầm này khi trang trí</p>
+                                        <div class="description">Phòng khách được ví như 'trái tim' của ngôi nhà do vậy việc trang trí, sắp xếp cho không gian này cũng rất quan trọng và được các gia chủ đặc biệt lưu tâm. Tuy nhiên, có một số sai lầm trong việc lựa chọn,...</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+            <div class="footer-container">
+                <div class="content1">
+                    <h2>COME VISIT US</h2>
+                    <p>31 DỊCH VỌNG HẬU, CẦU GIẤY, HÀ NỘI</p>
+                    <p>MON - FRIDAY: 8AM - 8PM</p>
+                    <p>SATURDAY: 9AM - 7PM</p>
+                    <p>SUNDAY: 9AM - 8PM</p>
+                </div>
+                <div class="content2">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.017669744039!2d105.78445077565232!3d21.0319789806182!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab4be8d6409f%3A0x84085138006934d9!2zMzEgUC4gROG7i2NoIFbhu41uZyBI4bqtdSwgROG7i2NoIFbhu41uZyBI4bqtdSwgQ-G6p3UgR2nhuqV5LCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1756659923650!5m2!1svi!2s"
+                        allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+        <div id="info-icon"><i class="fa-solid fa-users"></i></div>
+        <div id="info-popup">
+            <div id="info-header">
+                Thông tin thành viên
+                <button id="close-btn">X</button>
+            </div>
+            <div id="info-body">
+                <ul>
+                    <li>2354800195 – Lương Thế Cường</li>
+                    <li>2354800017 – Đặng Gia Bảo</li>
+                    <li>2354800176 – Nguyễn Văn Hoàng</li>
+                    <li>2354800243 – Nguyễn Quốc Vương</li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <script>
+            const infoIcon = document.getElementById('info-icon');
+            const infoPopup = document.getElementById('info-popup');
+            const closeBtn = document.getElementById('close-btn');
+
+            infoIcon.addEventListener('click', () => {
+                infoPopup.style.display = infoPopup.style.display === 'flex' ? 'none' : 'flex';
+            });
+
+            closeBtn.addEventListener('click', () => {
+                infoPopup.style.display = 'none';
+            });
+        </script>
+        <script async src="https://dochat.vn/code.js?id=9250829223305513694"></script>
+        <script src="bum.js"></script>
+    </footer>
+
+</body>
+
+</html>

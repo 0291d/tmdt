@@ -1,0 +1,136 @@
+.products {
+    padding: 40px 0;
+    background-color: #f9f9f9;
+}
+
+.products .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.products .col1 {
+    flex: 1;
+    padding: 73px 18.25px 30.4167px 63.875px;
+    background-color: #fff;
+}
+
+.products .col1 h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 20px 0 10px;
+    text-transform: uppercase;
+}
+
+.products .col1 p.description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.products .col1 .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.products .col1 .spec-table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+.products .col1 .spec-table td {
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.products .col1 .spec-table td.label {
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 120px;
+}
+
+.products .col1 .spec-table td.value {
+    color: #333;
+}
+
+.products .col2 {
+    flex: 1;
+    text-align: center;
+}
+
+.products .col2 img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .products .container {
+        flex-direction: column;
+    }
+    .products .col1 {
+        padding: 40px 20px;
+    }
+}
+
+.products .col2 .image-slider {
+    max-height: 500px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.products .col2 .image-slider img {
+    width: 100%;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.products .actions {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+}
+
+.products .add-to-cart {
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+}
+
+.products .add-to-cart::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    transition: width 0.3s ease;
+}
+
+.products .add-to-cart:hover::after {
+    width: 100%;
+}
+
+.products .wishlist-icon {
+    font-size: 20px;
+    color: #444;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.products .wishlist-icon:hover {
+    color: #8b8b8b;
+}
