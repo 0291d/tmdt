@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    // Người dùng hệ thống: có vai trò (role), có customer profile, orders, comments, wishlists
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -42,18 +43,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+      // Hồ sơ khách hàng gắn với user
       public function customer()
     {
         return $this->hasOne(Customer::class);
     }
 
+    // Các đơn hàng do user đặt (thông qua Customer)
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
 
+    // Bình luận do user tạo
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    // Bản ghi sản phẩm yêu thích của user
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
     }
 }

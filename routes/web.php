@@ -7,20 +7,25 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserInformationController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Validator;
+// Trang chu
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
+// Dang nhap/Dang ky mac dinh cua Laravel
 Auth::routes();
 
 Route::get('/home', function () {
     return redirect()->route('home.index');
 })->name('home');
 
+// Shop: danh sach + tim kiem theo q
 Route::get('/shop', [ShopController::class, 'index'])->name('shop');
 Route::get('/shop/category/{id}', [ShopController::class, 'category'])->name('shop.category');
 Route::get('/shop/brand/{brand}', [ShopController::class, 'brand'])->name('shop.brand');
 
 // Static pages
+// Trang tĩnh
 Route::view('/about', 'pages.about')->name('about');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::post('/contact', function (\Illuminate\Http\Request $request) {
@@ -36,18 +41,47 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
 })->name('contact.submit');
 
 // News
+// Tin tuc: danh sach + chi tiet
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{news}', [NewsController::class, 'show'])->name('news.show');
 
 
 // Product detail
+// Chi tiet san pham
 Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.show');
 
+// Product comments (users only)
+// Binh luan san pham (chi role=user duoc phep)
+Route::post('/product/{product}/comments', function (\Illuminate\Http\Request $request, \App\Models\Product $product) {
+    $user = auth()->user();
+    if (!$user) {
+        return redirect()->route('login');
+    }
+    // Only role 'user' can comment
+    if (strcasecmp((string)$user->role, 'user') !== 0) {
+        return back()->with('status', 'Chỉ tài khoản user mới được bình luận.');
+    }
+
+    $data = $request->validate([
+        'content' => ['required','string','max:2000'],
+    ]);
+
+    \App\Models\Comment::create([
+        'user_id' => $user->id,
+        'product_id' => $product->id,
+        'content' => $data['content'],
+    ]);
+
+    return back();
+})->middleware('auth')->name('product.comments.store');
+
 // Cart (session-based, simple)
+// Gio hang (session-based, giao dien don gian)
 Route::get('/cart', function () {
     return view('pages.cart');
 })->name('cart.index');
 // Apply coupon to cart
+// Ap ma giam gia vao gio
 Route::post('/cart/coupon', function (\Illuminate\Http\Request $request) {
     $data = $request->validate(['code' => ['required','string']]);
     $code = strtoupper(trim($data['code']));
@@ -78,10 +112,12 @@ Route::post('/cart/coupon', function (\Illuminate\Http\Request $request) {
     return back()->with('status', 'Áp dụng mã giảm giá thành công.');
 })->name('cart.coupon.apply');
 // Remove coupon
+// Huy ma giam gia
 Route::post('/cart/coupon/remove', function () {
     session()->forget('coupon');
     return back()->with('status', 'Đã bỏ mã giảm giá.');
 })->name('cart.coupon.remove');
+// Them san pham vao gio
 Route::post('/cart/add', function (\Illuminate\Http\Request $request) {
     $data = $request->validate([
         'product_id' => ['required','string'],
@@ -107,6 +143,7 @@ Route::post('/cart/add', function (\Illuminate\Http\Request $request) {
     session()->put('cart', $cart);
     return back();
 })->middleware('login.notice')->name('cart.add');
+// Cap nhat so luong trong gio
 Route::post('/cart/update', function (\Illuminate\Http\Request $request) {
     $data = $request->validate([
         'product_id' => ['required'],
@@ -119,6 +156,7 @@ Route::post('/cart/update', function (\Illuminate\Http\Request $request) {
     }
     return back();
 })->middleware('login.notice')->name('cart.update');
+// Xoa san pham khoi gio
 Route::post('/cart/remove', function (\Illuminate\Http\Request $request) {
     $data = $request->validate(['product_id' => ['required']]);
     $cart = session()->get('cart', []);
@@ -130,6 +168,7 @@ Route::post('/cart/remove', function (\Illuminate\Http\Request $request) {
 })->middleware('login.notice')->name('cart.remove');
 
 // Checkout: tạo Order status=paid từ session cart
+// Thanh toan: tao Order tu session cart
 Route::post('/cart/checkout', function () {
     $cart = session('cart', []);
     if (empty($cart)) return back();
@@ -183,6 +222,13 @@ Route::post('/cart/checkout', function () {
     session()->forget('coupon');
     return redirect()->route('cart.index');
 })->middleware('auth')->name('cart.checkout');
+
+// Wishlist (frontend)
+// Wishlist (frontend, can dang nhap)
+Route::middleware('auth')->group(function () {
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/add', [WishlistController::class, 'add'])->name('wishlist.add');
+});
 
 // User information (profile)
 Route::middleware('auth')->group(function () {

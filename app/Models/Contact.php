@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Contact extends Model
 {
+    // Bản ghi liên hệ từ form STORE & CONTACT
     use HasFactory, HasUuids;
     public $incrementing = false;
     protected $keyType = 'string';
@@ -16,4 +17,3 @@ class Contact extends Model
         'full_name', 'address', 'phone', 'email', 'content'
     ];
 }
-

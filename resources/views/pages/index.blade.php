@@ -10,22 +10,22 @@
     $latestNews  = $latestNews  ?? collect();
 @endphp
 
-<!-- Banner (keep classes for existing CSS) -->
+{{-- Banner trang chủ: slider nền dùng ảnh trong public/img và bum.js điều khiển --}}
 <section class="banner">
     <div class="banner-slides">
-        <div class="banner-slide" style="background-image: url('/img/slide1.jpg');"></div>
-        <div class="banner-slide" style="background-image: url('/img/slide2.jpg');"></div>
-        <div class="banner-slide" style="background-image: url('/img/slide3.jpg');"></div>
-        <div class="banner-slide" style="background-image: url('/img/vl.jpg');"></div>
-        <div class="banner-slide" style="background-image: url('/img/vq.jpg');"></div>
-        <div class="banner-slide" style="background-image: url('/img/vw.jpg');"></div>
+        <div class="banner-slide"><img src="{{ asset('img/slide1.jpg') }}" alt=""></div>
+        <div class="banner-slide"><img src="{{ asset('img/slide2.jpg') }}" alt=""></div>
+        <div class="banner-slide"><img src="{{ asset('img/slide3.jpg') }}" alt=""></div>
+        <div class="banner-slide"><img src="{{ asset('img/vl.jpg') }}" alt=""></div>
+        <div class="banner-slide"><img src="{{ asset('img/vq.jpg') }}" alt=""></div>
+        <div class="banner-slide"><img src="{{ asset('img/vw.jpg') }}" alt=""></div>
     </div>
     <div class="banner-indicators"></div>
     @yield('home-banner-extra')
 
 </section>
 
-<!-- Category grid (keep original classes) -->
+{{-- Lưới danh mục: link theo id danh mục lấy từ HomeController --}}
 <section class="category-grid">
     @php
         $sofaId = $idsByName['Sofa'] ?? null;
@@ -74,7 +74,7 @@
     </div>
 </section>
 
-<!-- New Arrivals (keep slider classes) -->
+{{-- Sản phẩm mới: slider ngang, ảnh lấy ảnh chính nếu có --}}
 <section class="product-section">
     <div class="section-header">
         <h2>NEW ARRIVALS</h2>
@@ -105,7 +105,7 @@
     </div>
 </section>
 
-<!-- News preview (keep card classes similar to news.html) -->
+{{-- Tin tức mới: hiển thị 4 bài gần nhất, ảnh cover nếu có --}}
 <section class="product-section">
     <div class="section-header">
         <h2>NEWS</h2>
@@ -140,7 +140,7 @@
     </div>
  </section>
 
-  <!-- Banner slider logic from VisualStudioCode/bum.js -->
+  {{-- Script điều khiển banner slider (auto, indicator, next/prev) --}}
   <script src="{{ asset('js/bum.js') }}"></script>
  <script>
 document.addEventListener('DOMContentLoaded', function () {

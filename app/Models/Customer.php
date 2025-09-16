@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Customer extends Model
 {
+     // Hồ sơ khách hàng (địa chỉ, điện thoại) gắn với User
      use HasUuids, HasFactory;
      public $incrementing = false;
     protected $keyType = 'string';
@@ -16,11 +17,13 @@ class Customer extends Model
         'user_id', 'phone', 'address'
     ];
 
+    // Chủ sở hữu hồ sơ
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    // Các đơn hàng của khách hàng
     public function orders()
     {
         return $this->hasMany(Order::class);

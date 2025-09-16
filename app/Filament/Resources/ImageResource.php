@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Filament\Resources;
 
@@ -17,22 +17,22 @@ class ImageResource extends Resource
     protected static ?string $model = Image::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-photograph';
-    protected static ?string $navigationGroup = 'Quản lý cửa hàng';
+    protected static ?string $navigationGroup = 'Quáº£n lÃ½ cá»­a hÃ ng';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\Select::make('imageable_type')
-                ->label('Loại đối tượng')
+                ->label('Loáº¡i Ä‘á»‘i tÆ°á»£ng')
                 ->options([
-                    Product::class => 'Sản phẩm',
-                    News::class => 'Bài viết',
+                    Product::class => 'Sáº£n pháº©m',
+                    News::class => 'BÃ i viáº¿t',
                 ])
                 ->reactive()
                 ->required(),
 
             Forms\Components\Select::make('imageable_id')
-                ->label('Đối tượng liên kết')
+                ->label('Äá»‘i tÆ°á»£ng liÃªn káº¿t')
                 ->options(function (callable $get) {
                     $type = $get('imageable_type');
 
@@ -53,11 +53,11 @@ class ImageResource extends Resource
                 ->disk('public')
                 ->directory('images')
                 ->visibility('public')
-                ->label('Đường dẫn ảnh')
+                ->label('ÄÆ°á»ng dáº«n áº£nh')
                 ->required(),
 
             Forms\Components\Toggle::make('is_main')
-                ->label('Ảnh chính')
+                ->label('áº¢nh chÃ­nh')
                 ->default(false),
         ]);
     }
@@ -66,22 +66,22 @@ class ImageResource extends Resource
     {
         return $table->columns([
             Tables\Columns\TextColumn::make('imageable_type')
-                ->label('Loại')
+                ->label('Loáº¡i')
                 ->sortable(),
 
             Tables\Columns\TextColumn::make('imageable_id')
-                ->label('ID liên kết'),
+                ->label('ID liÃªn káº¿t'),
 
             Tables\Columns\TextColumn::make('path')
-                ->label('Đường dẫn'),
+                ->label('ÄÆ°á»ng dáº«n'),
 
             Tables\Columns\IconColumn::make('is_main')
                 ->boolean()
-                ->label('Ảnh chính'),
+                ->label('áº¢nh chÃ­nh'),
 
             Tables\Columns\TextColumn::make('created_at')
                 ->dateTime('d/m/Y H:i')
-                ->label('Ngày tạo'),
+                ->label('NgÃ y táº¡o'),
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
@@ -94,6 +94,7 @@ class ImageResource extends Resource
 
     public static function getPages(): array
     {
+        // Định tuyến trang admin: List/Create/Edit
         return [
             'index' => Pages\ListImages::route('/'),
             'create' => Pages\CreateImage::route('/create'),
@@ -101,3 +102,9 @@ class ImageResource extends Resource
         ];
     }
 }
+
+
+
+
+
+

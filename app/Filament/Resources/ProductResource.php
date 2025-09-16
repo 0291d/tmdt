@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Filament\Resources;
 
@@ -15,34 +15,42 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
-    protected static ?string $navigationGroup = 'Quản lý cửa hàng';
+    protected static ?string $navigationGroup = 'Quáº£n lÃ½ cá»­a hÃ ng';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('Tên sản phẩm')
+                    ->label('TÃªn sáº£n pháº©m')
                     ->required(),
 
                 Forms\Components\TextInput::make('brand')
-                    ->label('Thương hiệu')
+                    ->label('ThÆ°Æ¡ng hiá»‡u')
                     ->required(),
 
                 Forms\Components\TextInput::make('price')
-                    ->label('Giá')
-                    ->numeric()
-                    ->required(),
+                    ->label('GiÃ¡')
+                    ->required()
+                    ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask
+                        ->numeric()
+                        ->decimalPlaces(0)
+                        ->thousandsSeparator('.')
+                    )
+                    ->dehydrateStateUsing(fn ($state) => $state !== null
+                        ? (int) str_replace('.', '', (string) $state)
+                        : null
+                    ),
 
                 Forms\Components\Textarea::make('description')
-                    ->label('Mô tả'),
+                    ->label('MÃ´ táº£'),
 
                 Forms\Components\TextInput::make('stock')
-                    ->label('Số lượng tồn')
+                    ->label('Sá»‘ lÆ°á»£ng tá»“n')
                     ->numeric(),
 
                 Forms\Components\Select::make('category_id')
-                    ->label('Danh mục')
+                    ->label('Danh má»¥c')
                     ->relationship('category', 'name')
                     ->required(),
             ]);
@@ -53,22 +61,25 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Tên')
+                    ->label('TÃªn')
                     ->sortable()
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('brand')
-                    ->label('Thương hiệu'),
+                    ->label('ThÆ°Æ¡ng hiá»‡u'),
 
                 Tables\Columns\TextColumn::make('price')
-                    ->label('Giá')
-                    ->money('VND', true),
+                    ->label('GiÃ¡')
+                    ->formatStateUsing(fn ($state) => is_null($state)
+                        ? ''
+                        : number_format((float) $state, 0, ',', '.') . ' â‚«'
+                    ),
 
                 Tables\Columns\TextColumn::make('category.name')
-                    ->label('Danh mục'),
+                    ->label('Danh má»¥c'),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Ngày tạo')
+                    ->label('NgÃ y táº¡o')
                     ->dateTime(),
             ])
             ->actions([
@@ -87,6 +98,7 @@ class ProductResource extends Resource
 
     public static function getPages(): array
     {
+        // Định tuyến trang admin: List/Create/Edit
         return [
             'index' => Pages\ListProducts::route('/'),
             'create' => Pages\CreateProduct::route('/create'),
@@ -94,3 +106,10 @@ class ProductResource extends Resource
         ];
     }
 }
+
+
+
+
+
+
+

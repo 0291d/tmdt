@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class OrderItem extends Model
 {
+    // Dòng sản phẩm trong đơn hàng; booted() tự tính lại tổng tiền đơn
     use HasFactory,HasUuids;
     public $incrementing = false;
     protected $keyType = 'string';
@@ -14,11 +15,13 @@ class OrderItem extends Model
         'order_id', 'product_id', 'quantity', 'price'
     ];
 
+    // Đơn hàng chủ
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
 
+    // Sản phẩm tương ứng
     public function product()
     {
         return $this->belongsTo(Product::class);
@@ -26,12 +29,14 @@ class OrderItem extends Model
 
     protected static function booted(): void
     {
+        // Khi tạo item, nếu chưa có price thì lấy từ Product
         static::creating(function (OrderItem $item) {
             if (is_null($item->price) && $item->product_id) {
                 $item->price = Product::whereKey($item->product_id)->value('price');
             }
         });
 
+        // Hàm tính lại subtotal/discount/total cho Order mỗi khi item thay đổi
         $recalc = function (OrderItem $item) {
             if (!$item->order_id) {
                 return;

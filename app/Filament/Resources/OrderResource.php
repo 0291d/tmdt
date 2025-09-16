@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Filament\Resources;
 
@@ -15,35 +15,35 @@ class OrderResource extends Resource
     protected static ?string $model = Order::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
-    protected static ?string $navigationGroup = 'Quản lý cửa hàng';
+    protected static ?string $navigationGroup = 'Quáº£n lÃ½ cá»­a hÃ ng';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\Select::make('customer_id')
-                ->label('Khách hàng')
+                ->label('KhÃ¡ch hÃ ng')
                 ->relationship('customer', 'phone')
                 ->required(),
 
             Forms\Components\Select::make('coupon_id')
-                ->label('Mã giảm giá')
+                ->label('MÃ£ giáº£m giÃ¡')
                 ->relationship('coupon', 'code')
                 ->nullable(),
 
             Forms\Components\Placeholder::make('total_display')
-                ->label('Tổng sau giảm')
+                ->label('Tá»•ng sau giáº£m')
                 ->content(function (?Order $record) {
                     return $record ? number_format((int) $record->total, 0, ',', '.') . ' VND' : null;
                 })
                 ->hiddenOn('create'),
 
             Forms\Components\Select::make('status')
-                ->label('Trạng thái')
+                ->label('Tráº¡ng thÃ¡i')
                 ->options([
-                    'pending' => 'Đang chờ',
-                    'paid' => 'Đã thanh toán',
-                    'completed' => 'Hoàn tất',
-                    'canceled' => 'Hủy',
+                    'pending' => 'Äang chá»',
+                    'paid' => 'ÄÃ£ thanh toÃ¡n',
+                    'completed' => 'HoÃ n táº¥t',
+                    'canceled' => 'Há»§y',
                 ])
                 ->required(),
         ]);
@@ -52,23 +52,23 @@ class OrderResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
-            Tables\Columns\TextColumn::make('customer.phone')->label('Khách hàng')->searchable(),
-            Tables\Columns\TextColumn::make('coupon.code')->label('Mã giảm giá'),
+            Tables\Columns\TextColumn::make('customer.phone')->label('KhÃ¡ch hÃ ng')->searchable(),
+            Tables\Columns\TextColumn::make('coupon.code')->label('MÃ£ giáº£m giÃ¡'),
             Tables\Columns\TextColumn::make('discount_amount')
-                ->label('Giảm (VND)')
+                ->label('Giáº£m (VND)')
                 ->formatStateUsing(fn ($state) => number_format((int) $state, 0, ',', '.')),
             Tables\Columns\TextColumn::make('total')
-                ->label('Tổng sau giảm')
+                ->label('Tá»•ng sau giáº£m')
                 ->formatStateUsing(fn ($state) => number_format((int) $state, 0, ',', '.')),
             Tables\Columns\BadgeColumn::make('status')
-                ->label('Trạng thái')
+                ->label('Tráº¡ng thÃ¡i')
                 ->enum([
-                    'pending' => 'Đang chờ',
-                    'paid' => 'Đã thanh toán',
-                    'completed' => 'Hoàn tất',
-                    'canceled' => 'Hủy',
+                    'pending' => 'Äang chá»',
+                    'paid' => 'ÄÃ£ thanh toÃ¡n',
+                    'completed' => 'HoÃ n táº¥t',
+                    'canceled' => 'Há»§y',
                 ]),
-            Tables\Columns\TextColumn::make('created_at')->label('Ngày tạo')->dateTime('d/m/Y H:i'),
+            Tables\Columns\TextColumn::make('created_at')->label('NgÃ y táº¡o')->dateTime('d/m/Y H:i'),
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
@@ -89,6 +89,7 @@ class OrderResource extends Resource
 
     public static function getPages(): array
     {
+        // Định tuyến trang admin: List/Create/Edit
         return [
             'index' => Pages\ListOrders::route('/'),
             'create' => Pages\CreateOrder::route('/create'),
@@ -96,4 +97,10 @@ class OrderResource extends Resource
         ];
     }
 }
+
+
+
+
+
+
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Filament\Resources;
 
@@ -15,13 +15,13 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationGroup = 'Quản lý cửa hàng';
+    protected static ?string $navigationGroup = 'Quáº£n lÃ½ cá»­a hÃ ng';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\TextInput::make('name')
-                ->label('Tên danh mục')
+                ->label('TÃªn danh má»¥c')
                 ->required()
                 ->unique(ignoreRecord: true),
         ]);
@@ -32,10 +32,10 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable(),
-                Tables\Columns\TextColumn::make('name')->label('Tên danh mục')->searchable(),
+                Tables\Columns\TextColumn::make('name')->label('TÃªn danh má»¥c')->searchable(),
                 Tables\Columns\TextColumn::make('products_count')
                     ->counts('products')
-                    ->label('Số sản phẩm'),
+                    ->label('Sá»‘ sáº£n pháº©m'),
                 Tables\Columns\TextColumn::make('created_at')->dateTime('d/m/Y H:i'),
             ])
             ->actions([
@@ -49,6 +49,7 @@ class CategoryResource extends Resource
 
     public static function getPages(): array
     {
+        // Định tuyến trang admin: List/Create/Edit
         return [
             'index' => Pages\ListCategories::route('/'),
             'create' => Pages\CreateCategory::route('/create'),
@@ -56,3 +57,10 @@ class CategoryResource extends Resource
         ];
     }
 }
+
+
+
+
+
+
+

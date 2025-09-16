@@ -8,6 +8,7 @@ class ShopController extends Controller
 {
     public function index()
     {
+        // Trang shop tổng: đọc tham số q để tìm kiếm theo name/brand/description
         $q = request('q');
 
         $categories = Category::withCount('products')->get();
@@ -18,7 +19,7 @@ class ShopController extends Controller
             ->selectRaw('brand, COUNT(*) as product_count')
             ->get();
 
-        $productsQuery = Product::with('images');
+        $productsQuery = Product::with('images'); // eager load ảnh để tránh N+1
         if ($q !== null && trim($q) !== '') {
             $term = trim($q);
             $productsQuery->where(function ($query) use ($term) {
@@ -34,6 +35,7 @@ class ShopController extends Controller
     }
     public function category($id)
     {
+        // Lọc theo danh mục
         $categories = Category::withCount('products')->get();
         $brands     = Product::select('brand')
             ->whereNotNull('brand')
@@ -48,6 +50,7 @@ class ShopController extends Controller
 
     public function brand($brand)
     {
+        // Lọc theo thương hiệu
         $categories = Category::withCount('products')->get();
         $brands     = Product::select('brand')
             ->whereNotNull('brand')

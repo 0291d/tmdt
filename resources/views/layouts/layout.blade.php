@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title', 'Shop')</title>
 
-    <!-- CSS: framework first, then custom -->
+    {{-- Nạp CSS: framework trước, custom sau để override dễ --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
@@ -18,33 +18,36 @@
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
     <link rel="stylesheet" href="{{ asset('css/news.css') }}">
     <link rel="stylesheet" href="{{ asset('css/products.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detailProducts.css') }}">
     <link rel="stylesheet" href="{{ asset('css/shop.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detailProducts.css') }}?v={{ @filemtime(public_path('css/detailProducts.css')) }}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
-    <!-- Navbar -->
+    {{-- Navbar: logo, tìm kiếm, tài khoản, giỏ hàng --}}
     <div class="navbar">
         <div class="navbar-left">
             <div><a href="{{ route('home.index') }}" class="logo">BREW</a></div>
         </div>
         <div class="navbar-right">
+            {{-- Ô tìm kiếm điều hướng sang trang shop với ?q= --}}
             <div class="search-bar">
-                <input type="text" placeholder="Bạn tìm kiếm gì...">
+                <input type="text" placeholder="Báº¡n tÃ¬m kiáº¿m gÃ¬...">
             </div>
             <img class="user-icon" src="{{ asset('img/usc.jpg') }}" alt="usericon">
             @guest
               <a href="{{ url('/login') }}">Log In</a>
             @else
+              {{-- Dropdown tài khoản: thông tin người dùng, yêu thích, admin, logout --}}
               <div class="user-menu" style="position:relative; display:inline-block;">
                 <button id="userMenuBtn" style="background:none;border:none;color:inherit;cursor:pointer;">
                   {{ auth()->user()->name ?? 'Account' }} <i class="fa-solid fa-caret-down"></i>
                 </button>
                 <div id="userDropdown" style="position:absolute; right:0; top:28px; background:#fff; border:1px solid #eee; border-radius:6px; padding:12px; min-width:220px; display:none; z-index:20;">
-                  <div class="mb-2"><a href="{{ route('user.info') }}">Thông tin người dùng</a></div>
+                  <div class="mb-2"><a href="{{ route('user.info') }}">ThÃ´ng tin ngÆ°á»i dÃ¹ng</a></div>
+                  <div class="mb-2"><a href="{{ route('wishlist.index') }}">YÃªu thÃ­ch</a></div>
                   @if (strcasecmp((string)auth()->user()->role, 'admin') === 0)
-                    <div class="mb-2"><a href="/admin">Quản trị</a></div>
+                    <div class="mb-2"><a href="/admin">Quáº£n trá»‹</a></div>
                   @endif
                   <form action="{{ route('logout') }}" method="POST">
                     @csrf
@@ -88,7 +91,7 @@
         </div>
     </div>
 
-    <!-- Menu -->
+    {{-- Menu chính: link nhanh các trang --}}
     <section class="menu-bar">
         <nav>
             <ul>
@@ -100,16 +103,16 @@
         </nav>
     </section>
 
-    <!-- Nội dung -->
-    @yield('content')
+    <!-- Ná»™i dung -->
+    {{-- Nội dung từng trang --}}@yield('content')
 
-    <!-- Footer -->
+    {{-- Footer + popup thông tin nhóm --}}
     <footer class="footer" id="footer">
         <div class="footer-content">
             <div class="footer-container">
                 <div class="content1">
                     <h2>COME VISIT US</h2>
-                    <p>31 DỊCH VỌNG HẬU, CẦU GIẤY, HÀ NỘI</p>
+                    <p>31 Dá»ŠCH Vá»ŒNG Háº¬U, Cáº¦U GIáº¤Y, HÃ€ Ná»˜I</p>
                     <p>MON - FRIDAY: 8AM - 8PM</p>
                     <p>SATURDAY: 9AM - 7PM</p>
                     <p>SUNDAY: 9AM - 8PM</p>
@@ -123,15 +126,15 @@
         <div id="info-icon"><i class="fa-solid fa-users"></i></div>
         <div id="info-popup">
             <div id="info-header">
-                Thông tin thành viên
+                ThÃ´ng tin thÃ nh viÃªn
                 <button id="close-btn">X</button>
             </div>
             <div id="info-body">
                 <ul>
-                    <li>2354800195 – Lương Thế Cường</li>
-                    <li>2354800017 – Đặng Gia Bảo</li>
-                    <li>2354800176 – Nguyễn Văn Hoàng</li>
-                    <li>2354800243 – Nguyễn Quốc Vương</li>
+                    <li>2354800195 â€“ LÆ°Æ¡ng Tháº¿ CÆ°á»ng</li>
+                    <li>2354800017 â€“ Äáº·ng Gia Báº£o</li>
+                    <li>2354800176 â€“ Nguyá»…n VÄƒn HoÃ ng</li>
+                    <li>2354800243 â€“ Nguyá»…n Quá»‘c VÆ°Æ¡ng</li>
                 </ul>
             </div>
         </div>
@@ -150,3 +153,6 @@
     </footer>
 </body>
 </html>
+
+
+

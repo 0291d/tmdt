@@ -1,7 +1,9 @@
 @extends('layouts.layout')
 
 @section('content')
+{{-- Trang shop: sidebar bộ lọc + danh sách sản phẩm --}}
 <section class="shop-content">
+    {{-- Sidebar: liệt kê danh mục và thương hiệu --}}
     <div class="sidebar">
         
         <h4 class="sidebar-title">CATEGORY</h4>
@@ -30,6 +32,7 @@
         </ul>
     </div>
 
+    {{-- Khu vực chính: kết quả tìm kiếm và phân trang --}}
     <div class="main-content">
         <div class="main-content container mt-5">
             <h2 class="mb-4 text-center">{{ isset($q) && $q ? 'Kết quả tìm kiếm: '.e($q) : '' }}</h2>
@@ -67,8 +70,8 @@
                 @endforelse
             </div>
 
-            <div class="d-flex justify-content-center mt-4">
-                {{ $products->links() }}
+            <div class="pagination-wrap">
+                {{ $products->onEachSide(1)->links() }}
             </div>
         </div>
         @yield('shop-main-content')

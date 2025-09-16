@@ -3,6 +3,7 @@
 @section('title', 'News - BREW')
 
 @section('content')
+{{-- Trang danh sách tin tức: banner + lưới thẻ tin, mỗi thẻ lấy ảnh cover nếu có --}}
 <section class="news">
     <div class="container-news">
         <div class="banner1">

@@ -2,19 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CommentResource\Pages;
-use App\Models\Comment;
+use App\Filament\Resources\WishlistResource\Pages;
+use App\Models\Wishlist;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 
-class CommentResource extends Resource
+class WishlistResource extends Resource
 {
-    protected static ?string $model = Comment::class;
+    protected static ?string $model = Wishlist::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-chat';
+    protected static ?string $navigationIcon = 'heroicon-o-heart';
     protected static ?string $navigationGroup = 'Quáº£n lÃ½ cá»­a hÃ ng';
 
     public static function form(Form $form): Form
@@ -23,13 +23,12 @@ class CommentResource extends Resource
             Forms\Components\Select::make('user_id')
                 ->label('NgÆ°á»i dÃ¹ng')
                 ->relationship('user', 'name')
+                ->searchable()
                 ->required(),
             Forms\Components\Select::make('product_id')
                 ->label('Sáº£n pháº©m')
                 ->relationship('product', 'name')
-                ->required(),
-            Forms\Components\Textarea::make('content')
-                ->label('Ná»™i dung bÃ¬nh luáº­n')
+                ->searchable()
                 ->required(),
         ]);
     }
@@ -37,16 +36,14 @@ class CommentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
-            Tables\Columns\TextColumn::make('user.name')->label('NgÆ°á»i dÃ¹ng'),
-            Tables\Columns\TextColumn::make('product.name')->label('Sáº£n pháº©m'),
-            Tables\Columns\TextColumn::make('content')->label('Ná»™i dung')->limit(50),
-            Tables\Columns\TextColumn::make('created_at')->label('NgÃ y táº¡o')->dateTime('d/m/Y H:i'),
-        ])
-        ->actions([
+            Tables\Columns\TextColumn::make('id')->label('ID')->copyable()->toggleable(),
+            Tables\Columns\TextColumn::make('user.name')->label('NgÆ°á»i dÃ¹ng')->searchable(),
+            Tables\Columns\TextColumn::make('product.name')->label('Sáº£n pháº©m')->searchable(),
+            Tables\Columns\TextColumn::make('created_at')->label('Thá»i gian')->dateTime('d/m/Y H:i')->toggleable(isToggledHiddenByDefault: true),
+        ])->actions([
             Tables\Actions\EditAction::make(),
             Tables\Actions\DeleteAction::make(),
-        ])
-        ->bulkActions([
+        ])->bulkActions([
             Tables\Actions\DeleteBulkAction::make(),
         ]);
     }
@@ -55,12 +52,13 @@ class CommentResource extends Resource
     {
         // Định tuyến trang admin: List/Create/Edit
         return [
-            'index' => Pages\ListComments::route('/'),
-            'create' => Pages\CreateComment::route('/create'),
-            'edit' => Pages\EditComment::route('/{record}/edit'),
+            'index' => Pages\ListWishlists::route('/'),
+            'create' => Pages\CreateWishlist::route('/create'),
+            'edit' => Pages\EditWishlist::route('/{record}/edit'),
         ];
     }
 }
+
 
 
 

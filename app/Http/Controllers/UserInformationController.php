@@ -7,6 +7,7 @@ use App\Models\Customer;
 
 class UserInformationController extends Controller
 {
+    // Controller thong tin nguoi dung: show/update customer profile
     public function show()
     {
         $user = auth()->user();

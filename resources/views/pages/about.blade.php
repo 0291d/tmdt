@@ -3,6 +3,7 @@
 @section('title', 'About Us - BREW')
 
 @section('content')
+{{-- Trang giới thiệu: ảnh banner + nội dung About/Mission/Vision --}}
 <section class="container py-4">
     <div class="main-img mb-4">
         <img src="{{ asset('img/about.jpg') }}" alt="About Us Image" class="img-fluid w-100">
@@ -34,4 +35,3 @@
     </div>
 </section>
 @endsection
-

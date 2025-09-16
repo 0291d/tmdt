@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Filament\Resources;
 
@@ -15,25 +15,25 @@ class CouponResource extends Resource
     protected static ?string $model = Coupon::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
-    protected static ?string $navigationGroup = 'Quản lý cửa hàng';
+    protected static ?string $navigationGroup = 'Quáº£n lÃ½ cá»­a hÃ ng';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make('code')->label('Mã giảm giá')->required(),
+            Forms\Components\TextInput::make('code')->label('MÃ£ giáº£m giÃ¡')->required(),
             Forms\Components\TextInput::make('discount_percent')
-                ->label('Phần trăm giảm')
+                ->label('Pháº§n trÄƒm giáº£m')
                 ->numeric()
                 ->required(),
             Forms\Components\DatePicker::make('expiry_date')
-                ->label('Ngày hết hạn')
+                ->label('NgÃ y háº¿t háº¡n')
                 ->required(),
             Forms\Components\TextInput::make('max_uses')
-                ->label('Số lần sử dụng tối đa')
+                ->label('Sá»‘ láº§n sá»­ dá»¥ng tá»‘i Ä‘a')
                 ->numeric()
                 ->required(),
             Forms\Components\TextInput::make('used_count')
-                ->label('Đã sử dụng')
+                ->label('ÄÃ£ sá»­ dá»¥ng')
                 ->numeric()
                 ->default(0),
         ]);
@@ -42,11 +42,11 @@ class CouponResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
-            Tables\Columns\TextColumn::make('code')->label('Mã giảm giá')->searchable(),
-            Tables\Columns\TextColumn::make('discount_percent')->label('Giảm (%)'),
-            Tables\Columns\TextColumn::make('expiry_date')->label('Ngày hết hạn')->date(),
-            Tables\Columns\TextColumn::make('max_uses')->label('Tối đa'),
-            Tables\Columns\TextColumn::make('used_count')->label('Đã dùng'),
+            Tables\Columns\TextColumn::make('code')->label('MÃ£ giáº£m giÃ¡')->searchable(),
+            Tables\Columns\TextColumn::make('discount_percent')->label('Giáº£m (%)'),
+            Tables\Columns\TextColumn::make('expiry_date')->label('NgÃ y háº¿t háº¡n')->date(),
+            Tables\Columns\TextColumn::make('max_uses')->label('Tá»‘i Ä‘a'),
+            Tables\Columns\TextColumn::make('used_count')->label('ÄÃ£ dÃ¹ng'),
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
@@ -59,6 +59,7 @@ class CouponResource extends Resource
 
     public static function getPages(): array
     {
+        // Định tuyến trang admin: List/Create/Edit
         return [
             'index' => Pages\ListCoupons::route('/'),
             'create' => Pages\CreateCoupon::route('/create'),
@@ -66,3 +67,9 @@ class CouponResource extends Resource
         ];
     }
 }
+
+
+
+
+
+

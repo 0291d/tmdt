@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Filament\Resources;
 
@@ -15,21 +15,21 @@ class ProductDetailResource extends Resource
     protected static ?string $model = ProductDetail::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
-    protected static ?string $navigationGroup = 'Quản lý cửa hàng';
+    protected static ?string $navigationGroup = 'Quáº£n lÃ½ cá»­a hÃ ng';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Forms\Components\Select::make('product_id')
-                ->label('Sản phẩm')
+                ->label('Sáº£n pháº©m')
                 ->relationship('product', 'name')
                 ->required(),
 
-            Forms\Components\TextInput::make('width')->label('Rộng (cm)')->numeric()->required(),
-            Forms\Components\TextInput::make('length')->label('Dài (cm)')->numeric()->required(),
+            Forms\Components\TextInput::make('width')->label('Rá»™ng (cm)')->numeric()->required(),
+            Forms\Components\TextInput::make('length')->label('DÃ i (cm)')->numeric()->required(),
             Forms\Components\TextInput::make('height')->label('Cao (cm)')->numeric()->required(),
-            Forms\Components\Textarea::make('origin')->label('Xuất xứ')->required(),
-            Forms\Components\Textarea::make('finishes')->label('Hoàn thiện bề mặt')->required(),
+            Forms\Components\Textarea::make('origin')->label('Xuáº¥t xá»©')->required(),
+            Forms\Components\Textarea::make('finishes')->label('HoÃ n thiá»‡n bá» máº·t')->required(),
         ]);
     }
 
@@ -37,13 +37,13 @@ class ProductDetailResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('product.name')->label('Sản phẩm')->searchable(),
-                Tables\Columns\TextColumn::make('width')->label('Rộng'),
-                Tables\Columns\TextColumn::make('length')->label('Dài'),
+                Tables\Columns\TextColumn::make('product.name')->label('Sáº£n pháº©m')->searchable(),
+                Tables\Columns\TextColumn::make('width')->label('Rá»™ng'),
+                Tables\Columns\TextColumn::make('length')->label('DÃ i'),
                 Tables\Columns\TextColumn::make('height')->label('Cao'),
-                Tables\Columns\TextColumn::make('origin')->label('Xuất xứ'),
-                Tables\Columns\TextColumn::make('finishes')->label('Hoàn thiện'),
-                Tables\Columns\TextColumn::make('created_at')->label('Ngày tạo')->dateTime('d/m/Y H:i'),
+                Tables\Columns\TextColumn::make('origin')->label('Xuáº¥t xá»©'),
+                Tables\Columns\TextColumn::make('finishes')->label('HoÃ n thiá»‡n'),
+                Tables\Columns\TextColumn::make('created_at')->label('NgÃ y táº¡o')->dateTime('d/m/Y H:i'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -56,6 +56,7 @@ class ProductDetailResource extends Resource
 
     public static function getPages(): array
     {
+        // Định tuyến trang admin: List/Create/Edit
         return [
             'index' => Pages\ListProductDetails::route('/'),
             'create' => Pages\CreateProductDetail::route('/create'),
@@ -63,3 +64,9 @@ class ProductDetailResource extends Resource
         ];
     }
 }
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Filament\Resources;
 
@@ -15,7 +15,7 @@ class ContactResource extends Resource
     protected static ?string $model = Contact::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-phone';
-    protected static ?string $navigationGroup = 'Quản lý cửa hàng';
+    protected static ?string $navigationGroup = 'Quáº£n lÃ½ cá»­a hÃ ng';
 
     public static function form(Form $form): Form
     {
@@ -31,10 +31,10 @@ class ContactResource extends Resource
     public static function table(Table $table): Table
     {
         return $table->columns([
-            Tables\Columns\TextColumn::make('full_name')->label('Họ tên')->searchable(),
-            Tables\Columns\TextColumn::make('phone')->label('Điện thoại')->searchable(),
+            Tables\Columns\TextColumn::make('full_name')->label('Há» tÃªn')->searchable(),
+            Tables\Columns\TextColumn::make('phone')->label('Äiá»‡n thoáº¡i')->searchable(),
             Tables\Columns\TextColumn::make('email')->label('Email')->searchable(),
-            Tables\Columns\TextColumn::make('created_at')->label('Ngày tạo')->dateTime('d/m/Y H:i'),
+            Tables\Columns\TextColumn::make('created_at')->label('NgÃ y táº¡o')->dateTime('d/m/Y H:i'),
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
@@ -47,10 +47,17 @@ class ContactResource extends Resource
 
     public static function getPages(): array
     {
+        // Định tuyến trang admin: List/Create/Edit
         return [
             'index' => Pages\ListContacts::route('/'),
             'edit' => Pages\EditContact::route('/{record}/edit'),
         ];
     }
 }
+
+
+
+
+
+
 

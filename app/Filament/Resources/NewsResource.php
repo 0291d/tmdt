@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Filament\Resources;
 
@@ -15,22 +15,22 @@ class NewsResource extends Resource
     protected static ?string $model = News::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
-    protected static ?string $navigationGroup = 'Quản lý nội dung';
+    protected static ?string $navigationGroup = 'Quáº£n lÃ½ ná»™i dung';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make('title')->label('Tiêu đề')->required(),
-            Forms\Components\Textarea::make('content')->label('Nội dung')->required(),
+            Forms\Components\TextInput::make('title')->label('TiÃªu Ä‘á»')->required(),
+            Forms\Components\Textarea::make('content')->label('Ná»™i dung')->required(),
         ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table->columns([
-            Tables\Columns\TextColumn::make('title')->label('Tiêu đề')->searchable(),
-            Tables\Columns\TextColumn::make('content')->label('Nội dung')->limit(50),
-            Tables\Columns\TextColumn::make('created_at')->label('Ngày tạo')->dateTime('d/m/Y H:i'),
+            Tables\Columns\TextColumn::make('title')->label('TiÃªu Ä‘á»')->searchable(),
+            Tables\Columns\TextColumn::make('content')->label('Ná»™i dung')->limit(50),
+            Tables\Columns\TextColumn::make('created_at')->label('NgÃ y táº¡o')->dateTime('d/m/Y H:i'),
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
@@ -43,6 +43,7 @@ class NewsResource extends Resource
 
     public static function getPages(): array
     {
+        // Định tuyến trang admin: List/Create/Edit
         return [
             'index' => Pages\ListNews::route('/'),
             'create' => Pages\CreateNews::route('/create'),
@@ -50,3 +51,9 @@ class NewsResource extends Resource
         ];
     }
 }
+
+
+
+
+
+

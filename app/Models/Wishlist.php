@@ -5,23 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-class Comment extends Model
+
+class Wishlist extends Model
 {
-    // Bình luận của người dùng cho sản phẩm
-    use HasFactory,HasUuids;
+    // Danh sách yêu thích: user_id (số nguyên) + product_id (UUID)
+    use HasFactory, HasUuids;
+
     public $incrementing = false;
     protected $keyType = 'string';
+
     protected $fillable = [
-        'user_id', 'product_id', 'content'
+        'user_id', 'product_id',
     ];
 
-    // Người dùng đã bình luận
+    // Chủ sở hữu wishlist
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Sản phẩm được bình luận
+    // Sản phẩm được thêm vào wishlist
     public function product()
     {
         return $this->belongsTo(Product::class);

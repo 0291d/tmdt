@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Order extends Model
 {
+    // Đơn hàng: tổng tiền, giảm giá; liên kết Customer, Coupon, OrderItems
     use HasFactory,HasUuids;
     public $incrementing = false;
     protected $keyType = 'string';
@@ -16,16 +17,19 @@ class Order extends Model
         'customer_id', 'coupon_id', 'status', 'discount_percent', 'discount_amount', 'total'
     ];
 
+    // Khách hàng (hồ sơ) đặt đơn
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
 
+    // Mã giảm giá áp dụng (nếu có)
     public function coupon()
     {
         return $this->belongsTo(Coupon::class);
     }
 
+    // Danh sách item thuộc đơn hàng
     public function items()
     {
         return $this->hasMany(OrderItem::class);
@@ -34,6 +38,6 @@ class Order extends Model
     // Ngăn không cho set thủ công từ form; tổng được tính từ OrderItem
     public function setTotalAttribute($value): void
     {
-        // ignore manual assignment; total is computed in OrderItem events
+        // Bỏ qua gán thủ công; total được tính trong luồng xử lý tạo đơn
     }
 }

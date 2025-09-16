@@ -3,6 +3,7 @@
 @section('title','User Information')
 
 @section('content')
+{{-- Trang thông tin người dùng: hiển thị tên/email, cập nhật số điện thoại và địa chỉ --}}
 <div class="container py-4">
   @if (session('status'))
     <div class="alert alert-success">{{ session('status') }}</div>
@@ -39,4 +40,3 @@
   </div>
 </div>
 @endsection
-

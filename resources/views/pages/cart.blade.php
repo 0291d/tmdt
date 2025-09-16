@@ -3,6 +3,7 @@
 @section('title', 'Cart')
 
 @section('content')
+{{-- Trang giỏ hàng: lấy dữ liệu từ session, cho phép cập nhật số lượng/xóa, áp mã giảm giá và thanh toán --}}
 @php
     $cart = session('cart', []);
     $items = array_values($cart);
@@ -20,14 +21,17 @@
         <div class="title-underline"></div>
     </div>
 
+    {{-- Khu vực chính chia 2 cột: danh sách item (trái) + tổng tiền và mã giảm giá (phải) --}}
     <div class="cart-section">
         <div class="row gx-4">
             <div class="col-12 col-lg-8">
+                {{-- Nếu giỏ trống hiển thị thông báo --}}
                 @if(empty($items))
                     <div class="cart-empty">
                         <p>Giỏ hàng của bạn đang trống</p>
                     </div>
                 @else
+                    {{-- Hiển thị từng item: ảnh, tên, brand, giá, controls +/- và xóa --}}
                     @foreach ($items as $it)
                         <div class="card mb-3 p-3">
                             <div class="d-flex align-items-center gap-3">
@@ -63,6 +67,7 @@
             </div>
 
             <div class="col-12 col-lg-4">
+                {{-- Thông tin đơn hàng tạm tính + áp/huỷ mã giảm giá --}}
                 <div class="order-card p-3">
                     <h5>Thông tin đơn hàng</h5>
                     <div class="line"></div>

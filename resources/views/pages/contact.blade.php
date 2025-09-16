@@ -3,9 +3,11 @@
 @section('title', 'Store & Contact - BREW')
 
 @section('content')
+{{-- Trang liên hệ: thông tin showroom + bản đồ + form gửi liên hệ lưu vào DB --}}
 <section class="page-contact">
 <div class="white-spacing"></div>
 <div class="container">
+    {{-- Thông tin cửa hàng/showroom --}}
     <div class="row mb-4">
         <div class="col-12 col-md-6">
             <div class="subtitle">Contacts</div>
@@ -21,6 +23,7 @@
         </div>
     </div>
 
+    {{-- Bản đồ Google Maps --}}
     <div class="row mb-4">
         <div class="col-12">
             <div class="map-box">
@@ -30,6 +33,7 @@
         </div>
     </div>
 
+    {{-- Form liên hệ: POST tới route('contact.submit') --}}
     <div class="row">
         <div class="col-12">
             <p class="text-center text-muted mb-4">
