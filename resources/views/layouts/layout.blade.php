@@ -126,15 +126,15 @@
         <div id="info-icon"><i class="fa-solid fa-users"></i></div>
         <div id="info-popup">
             <div id="info-header">
-                ThÃ´ng tin thÃ nh viÃªn
+                Thông tin thành viên
                 <button id="close-btn">X</button>
             </div>
             <div id="info-body">
                 <ul>
-                    <li>2354800195 â€“ LÆ°Æ¡ng Tháº¿ CÆ°á»ng</li>
-                    <li>2354800017 â€“ Äáº·ng Gia Báº£o</li>
-                    <li>2354800176 â€“ Nguyá»…n VÄƒn HoÃ ng</li>
-                    <li>2354800243 â€“ Nguyá»…n Quá»‘c VÆ°Æ¡ng</li>
+                    <li>2354800195 - Lương thế cường</li>
+                    <li>2354800017 - Đặng gia bảo</li>
+                    <li>2354800176 - Nguyễn văn hoàng</li>
+                    <li>2354800243 - Nguyễn quốc vương</li>
                 </ul>
             </div>
         </div>
