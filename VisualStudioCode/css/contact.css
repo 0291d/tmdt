@@ -1,0 +1,73 @@
+ h1 {
+     font-size: 48px;
+     font-weight: 400;
+     margin-bottom: 10px;
+ }
+ 
+ .subtitle {
+     font-size: 12px;
+     letter-spacing: 2px;
+     text-transform: uppercase;
+     color: #777;
+     margin-bottom: 8px;
+ }
+ 
+ .info-block strong {
+     display: block;
+     font-size: 14px;
+     text-transform: uppercase;
+     margin-top: 12px;
+ }
+ 
+ .map-box {
+     background: url("https://via.placeholder.com/1200x300?text=Google+Map+Here") center/cover no-repeat;
+     height: 300px;
+     border: 6px solid transparent;
+     border-image: linear-gradient(to right, #1a4e8a, #e58c2c) 1;
+     margin: 40px 0;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: #555;
+     font-size: 16px;
+ }
+ 
+ .map-box iframe {
+     width: 100%;
+     height: 100%;
+     border: 0;
+ }
+ 
+ form label {
+     font-size: 12px;
+     font-weight: 500;
+     text-transform: uppercase;
+     margin-bottom: 4px;
+     color: #a87c49;
+ }
+ 
+ form .form-control {
+     border: 1px solid #a87c49;
+     border-radius: 0;
+     font-size: 14px;
+ }
+ 
+ form .btn-submit {
+     background: transparent;
+     border: 1px solid #a87c49;
+     color: #a87c49;
+     text-transform: uppercase;
+     border-radius: 0;
+     padding: 8px 24px;
+     float: right;
+     margin-top: 10px;
+ }
+ 
+ form .btn-submit:hover {
+     background: #a87c49;
+     color: #fff;
+ }
+ 
+ .white-spacing {
+     margin: 100px;
+ }
