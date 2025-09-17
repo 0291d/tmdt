@@ -66,7 +66,8 @@ class ProductResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('brand')
-                    ->label('Thương hiệu'),
+                    ->label('Thương hiệu')
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('price')
                     ->label('Giá')
@@ -76,12 +77,14 @@ class ProductResource extends Resource
                     ),
 
                 Tables\Columns\TextColumn::make('category.name')
-                    ->label('Danh mục'),
+                    ->label('Danh mục')
+                    ->toggleable(),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Ngày tạo')
                     ->dateTime('d/m/Y H:i'),
             ])
+            ->defaultSort('created_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -105,4 +108,5 @@ class ProductResource extends Resource
         ];
     }
 }
+
 

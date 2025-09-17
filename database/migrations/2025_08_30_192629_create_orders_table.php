@@ -19,7 +19,8 @@ return new class extends Migration
             $table->uuid('coupon_id')->nullable();
             $table->decimal('total',10,2)->default(0);
             $table->enum('status', ['pending','paid', 'completed', 'cancelled'])->default('pending');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('coupon_id')->references('id')->on('coupons')->onDelete('set null');

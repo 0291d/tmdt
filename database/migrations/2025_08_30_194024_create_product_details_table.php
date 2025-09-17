@@ -22,7 +22,8 @@ return new class extends Migration
             $table->integer('height');
             $table->text('origin');
             $table->text('finishes');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });    

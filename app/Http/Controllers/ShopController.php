@@ -8,7 +8,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        // Trang shop tổng: đọc tham số q để tìm kiếm theo name/brand/description
+        // Trang shop tổng: có tham số q để tìm kiếm theo name/brand/description
         $q = request('q');
 
         $categories = Category::withCount('products')->get();
@@ -19,7 +19,8 @@ class ShopController extends Controller
             ->selectRaw('brand, COUNT(*) as product_count')
             ->get();
 
-        $productsQuery = Product::with('images'); // eager load ảnh để tránh N+1
+        // Eager load images và sắp xếp ổn định theo mới nhất
+        $productsQuery = Product::with('images')->latest();
         if ($q !== null && trim($q) !== '') {
             $term = trim($q);
             $productsQuery->where(function ($query) use ($term) {
@@ -33,6 +34,7 @@ class ShopController extends Controller
 
         return view('pages.shop', compact('categories', 'brands', 'products', 'q'));
     }
+
     public function category($id)
     {
         // Lọc theo danh mục
@@ -43,7 +45,11 @@ class ShopController extends Controller
             ->selectRaw('brand, COUNT(*) as product_count')
             ->get();
 
-        $products = Product::with('images')->where('category_id', $id)->paginate(12);
+        $products = Product::with('images')
+            ->where('category_id', $id)
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
 
         return view('pages.shop', compact('categories', 'brands', 'products'));
     }
@@ -58,8 +64,13 @@ class ShopController extends Controller
             ->selectRaw('brand, COUNT(*) as product_count')
             ->get();
 
-        $products = Product::with('images')->where('brand', $brand)->paginate(12);
+        $products = Product::with('images')
+            ->where('brand', $brand)
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
 
         return view('pages.shop', compact('categories', 'brands', 'products'));
     }
 }
+

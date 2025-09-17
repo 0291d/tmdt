@@ -13,7 +13,8 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             // products.id is UUID in this app
             $table->uuid('product_id');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
             $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();
             $table->unique(['user_id', 'product_id']);

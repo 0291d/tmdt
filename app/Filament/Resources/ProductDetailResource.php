@@ -9,6 +9,7 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductDetailResource extends Resource
 {
@@ -37,7 +38,10 @@ class ProductDetailResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('product.name')->label('Sản phẩm')->searchable(),
+                Tables\Columns\TextColumn::make('product.name')
+                    ->label('Sản phẩm')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('width')->label('Rộng'),
                 Tables\Columns\TextColumn::make('length')->label('Dài'),
                 Tables\Columns\TextColumn::make('height')->label('Cao'),
@@ -52,6 +56,13 @@ class ProductDetailResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->with('product')
+            ->latest();
     }
 
     public static function getPages(): array

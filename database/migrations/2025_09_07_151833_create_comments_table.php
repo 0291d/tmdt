@@ -11,7 +11,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');    
             $table->uuid('product_id')->nullable(); 
             $table->text('content');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
  
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

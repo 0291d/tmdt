@@ -16,4 +16,9 @@ class ListProducts extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getTableRecordsPerPageSelectOptions(): array
+    {
+        return [10, 25, 50];
+    }
 }

@@ -24,11 +24,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Use Bootstrap 5 pagination views so links() render Bootstrap markup
-        if (method_exists(Paginator::class, 'useBootstrapFive')) {
-            Paginator::useBootstrapFive();
-        } else {
-            Paginator::useBootstrap();
+        // Frontend uses Bootstrap pagination, Filament admin uses Tailwind.
+        // Avoid overriding paginator views on Filament routes to keep Livewire pagination working.
+        $isFilament = request()->routeIs('filament.*') || request()->is('admin*');
+        if (!$isFilament) {
+            if (method_exists(Paginator::class, 'useBootstrapFive')) {
+                Paginator::useBootstrapFive();
+            } else {
+                Paginator::useBootstrap();
+            }
         }
     }
 }

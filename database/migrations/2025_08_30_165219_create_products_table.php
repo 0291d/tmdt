@@ -21,7 +21,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price',10,2);
             $table->integer('stock')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

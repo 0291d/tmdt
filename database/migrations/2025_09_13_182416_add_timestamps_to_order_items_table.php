@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::table('order_items', function (Blueprint $table) {
             if (!Schema::hasColumn('order_items', 'created_at')) {
-                $table->timestamp('created_at')->nullable()->after('price');
+                $table->timestamp('created_at')->useCurrent()->after('price');
             }
             if (!Schema::hasColumn('order_items', 'updated_at')) {
-                $table->timestamp('updated_at')->nullable()->after('created_at');
+                $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->after('created_at');
             }
         });
     }

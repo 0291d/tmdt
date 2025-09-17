@@ -28,14 +28,16 @@ class CreateAdminTables extends Migration
             $table->string('name');
             $table->string('avatar')->nullable();
             $table->string('remember_token', 100)->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
 
         Schema::create(config('admin.database.roles_table'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50)->unique();
             $table->string('slug', 50)->unique();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
 
         Schema::create(config('admin.database.permissions_table'), function (Blueprint $table) {
@@ -44,7 +46,8 @@ class CreateAdminTables extends Migration
             $table->string('slug', 50)->unique();
             $table->string('http_method')->nullable();
             $table->text('http_path')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
 
         Schema::create(config('admin.database.menu_table'), function (Blueprint $table) {
@@ -56,35 +59,40 @@ class CreateAdminTables extends Migration
             $table->string('uri')->nullable();
             $table->string('permission')->nullable();
 
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
 
         Schema::create(config('admin.database.role_users_table'), function (Blueprint $table) {
             $table->integer('role_id');
             $table->integer('user_id');
             $table->index(['role_id', 'user_id']);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
 
         Schema::create(config('admin.database.role_permissions_table'), function (Blueprint $table) {
             $table->integer('role_id');
             $table->integer('permission_id');
             $table->index(['role_id', 'permission_id']);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
 
         Schema::create(config('admin.database.user_permissions_table'), function (Blueprint $table) {
             $table->integer('user_id');
             $table->integer('permission_id');
             $table->index(['user_id', 'permission_id']);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
 
         Schema::create(config('admin.database.role_menu_table'), function (Blueprint $table) {
             $table->integer('role_id');
             $table->integer('menu_id');
             $table->index(['role_id', 'menu_id']);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
 
         Schema::create(config('admin.database.operation_log_table'), function (Blueprint $table) {
@@ -95,7 +103,8 @@ class CreateAdminTables extends Migration
             $table->string('ip');
             $table->text('input');
             $table->index('user_id');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

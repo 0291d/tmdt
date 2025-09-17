@@ -15,7 +15,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->text('content');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
@@ -24,4 +25,3 @@ return new class extends Migration
         Schema::dropIfExists('contacts');
     }
 };
-

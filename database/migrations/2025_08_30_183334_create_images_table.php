@@ -22,7 +22,8 @@ return new class extends Migration
 
             $table->string('path'); 
             $table->boolean('is_main')->default(false); 
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
             $table->index(['imageable_id', 'imageable_type']);
         });
