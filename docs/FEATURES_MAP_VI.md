@@ -1,7 +1,3 @@
-BREW Furniture Shop — Bản đồ tính năng & vai trò tệp (Tiếng Việt)
-
-Tài liệu này liệt kê các chức năng chính và giải thích vai trò của từng tệp quan trọng trong dự án.
-
 1) Định tuyến (Routes)
 - routes/web.php: Khai báo toàn bộ route giao diện người dùng.
   - Trang chủ: GET `/` → HomeController@index.
@@ -90,8 +86,4 @@ Tài liệu này liệt kê các chức năng chính và giải thích vai trò 
 - Bình luận: POST `/product/{product}/comments` (auth + role=user) → tạo Comment; FEEDBACK render danh sách.
 - Wishlist: POST `/wishlist/add` (auth) → tạo record nếu chưa tồn tại; trang `/wishlist` liệt kê.
 
-11) Ghi chú & thực hành tốt
-- Ảnh tĩnh nên tham chiếu bằng `asset('img/...')` để đúng base URL trên XAMPP/thư mục con.
-- Đã thêm query version cho `detailProducts.css` trong layout để tránh cache khi sửa CSS.
-- IDs: Product/Wishlist.id dùng UUID; User.id dùng big integer; Wishlist.user_id là foreignId để khớp users.
 

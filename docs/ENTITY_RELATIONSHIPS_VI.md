@@ -81,5 +81,5 @@ Ràng Buộc/Chính Sách Dữ Liệu
 Gợi Ý Truy Vấn/Index
 - Tra cứu hình polymorphic: dùng INDEX (`imageable_id`,`imageable_type`).
 - Anti-dup wishlist: UNIQUE(`user_id`,`product_id`).
-- Tra cứu đơn theo khách: INDEX ngầm trên FK `customer_id` (nên cân nhắc bổ sung index tường minh nếu cần).
+- Tra cứu đơn theo khách: INDEX ngầm trên FK `customer_id` 
 

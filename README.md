@@ -1,7 +1,3 @@
-TMDT Furniture Shop — Tổng Quan Dự Án (VI)
-
-Mô tả ngắn: Website thương mại điện tử (nội thất) xây dựng bằng Laravel + Blade, khu vực quản trị sử dụng Filament. Tài liệu này tóm tắt các chức năng theo vai trò để AI/đồng đội nhanh chóng hiểu hệ thống.
-
 Chức Năng Theo Vai Trò
 - Khách hàng
   - Trang chủ: banner, danh mục nổi bật, sản phẩm mới, tin tức.
@@ -14,7 +10,12 @@ Chức Năng Theo Vai Trò
   - Wishlist: thêm/xóa yêu thích, trang danh sách yêu thích.
   - Bình luận: gửi nhận xét sản phẩm khi đã đăng nhập.
   - Liên hệ: gửi form hỗ trợ, lưu vào cơ sở dữ liệu.
-- Quản trị (Filament)
+  - Reset mật khẩu: nhập email của tài khoản để nhận link reset mật khẩu (sử dụng docker để test chức năng)
+- Quản trị (Filament) 
+  - url: localhost/tmdt/public/admin 
+  - Account: 
+      TK: admin@gmail.com
+      Pass: 123456  
   - Danh mục: CRUD danh mục sản phẩm.
   - Sản phẩm: CRUD sản phẩm, quản lý ảnh (Image), chi tiết sản phẩm (ProductDetail).
   - Đơn hàng: xem danh sách, chi tiết; quản lý `Order` và `OrderItem`.
@@ -48,14 +49,3 @@ Luồng Nghiệp Vụ Cốt Lõi
 - Wishlist: thêm/xóa mục yêu thích (cần đăng nhập), trang `resources/views/pages/wishlist.blade.php`.
 - Bình luận: POST `/product/{product}/comments` (cần đăng nhập) → tạo `Comment`.
 
-Hướng Dẫn Prompt Cho AI
-- Ngữ cảnh nhanh: “Phân tích các tính năng Khách hàng/Admin trong dự án Laravel này dựa trên README. Nếu cần chi tiết, mở các tệp được liệt kê (routes, models, Filament resources, views) để theo dõi luồng.”
-- Câu hỏi gợi ý:
-  - “Hãy mô tả luồng checkout: route, session, model liên quan, nơi lưu đơn hàng.”
-  - “Liệt kê các rule xác thực cho đăng ký người dùng và vị trí triển khai.”
-  - “Xác định trường chính của `Coupon` và cách kiểm tra hiệu lực mã.”
-  - “Chỉ ra nơi render wishlist và API/route để thêm/xóa wishlist.”
-
-Ghi Chú
-- Môi trường: Laravel, Blade, Filament; DB quan hệ (MySQL hoặc tương thích).
-- Chuẩn EOL: dự án dùng LF; đã cấu hình trong `.gitattributes`.

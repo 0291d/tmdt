@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserInformationController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Validator;
 // Trang chu
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -234,4 +235,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/user/info', [UserInformationController::class, 'show'])->name('user.info');
     Route::post('/user/info', [UserInformationController::class, 'update'])->name('user.info.update');
+});
+
+// Order history (frontend)
+Route::middleware('auth')->group(function () {
+    Route::get('/orders/history', [OrderController::class, 'history'])->name('orders.history');
 });

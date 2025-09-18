@@ -8,6 +8,8 @@
   <div class="container">
     <h2 class="wishlist-title">Sản phẩm yêu thích</h2>
 
+    @php $items = $items instanceof \Illuminate\Support\Collection ? $items : collect($items); @endphp
+
     @if (session('status'))
       <div class="alert alert-info text-center" role="alert">{{ session('status') }}</div>
     @endif
@@ -21,16 +23,30 @@
             $p = $it->product;
             $img = ($p?->images?->where('is_main', true)->first() ?? $p?->images?->first());
             $src = $img ? $img->url : asset('img/placeholder.png');
+            $price = $p?->price;
+            $formattedPrice = $price !== null
+                ? number_format((float) $price, 0, ',', '.') . ' VND'
+                : null;
           @endphp
-          <div class="wish-card">
-            <a href="{{ route('product.show', $p) }}" class="image-wrap">
-              <img src="{{ $src }}" alt="{{ $p->name }}">
+          <article class="wish-card">
+            <a href="{{ $p ? route('product.show', $p) : '#' }}" class="wish-card__image">
+              <img src="{{ $src }}" alt="{{ $p?->name ?? 'Wishlist item' }}">
             </a>
-            <div class="meta">
-              <a class="name" href="{{ route('product.show', $p) }}">{{ $p->name }}</a>
-              <div class="brand">{{ $p->brand }}</div>
+            <div class="wish-card__body">
+              <a class="wish-card__name" href="{{ $p ? route('product.show', $p) : '#' }}">{{ $p?->name ?? 'Sản phẩm không khả dụng' }}</a>
+              @if (!empty($p?->brand))
+                <div class="wish-card__brand">{{ $p?->brand }}</div>
+              @endif
+              @if ($formattedPrice)
+                <div class="wish-card__price">{{ $formattedPrice }}</div>
+              @endif
+              @if ($p)
+                <div class="wish-card__actions">
+                  <a class="wish-card__action" href="{{ route('product.show', $p) }}">Xem chi tiết</a>
+                </div>
+              @endif
             </div>
-          </div>
+          </article>
         @endforeach
       </div>
     @endif
