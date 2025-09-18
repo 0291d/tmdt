@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace App\Http\Middleware;
 
 use Closure;
@@ -11,7 +11,7 @@ class RequireLoginWithMessage
         if (!auth()->check()) {
             return redirect()
                 ->guest('/login')
-                ->with('status', 'B?n ph?i dang nh?p ho?c dang ky d? ti?p t?c.');
+                ->with('status', 'Bạn phải đăng nhập hoặc đăng ký để tiếp tục');
         }
 
         return $next($request);

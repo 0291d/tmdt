@@ -37,7 +37,7 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
         'content' => ['required','string'],
     ]);
     \App\Models\Contact::create($data);
-    return back()->with('status', 'Gửi liên hệ thành công!');
+    return back()->with('status', 'Cảm ơn đã liên hệ với chúng tôi');
 })->name('contact.submit');
 
 // News

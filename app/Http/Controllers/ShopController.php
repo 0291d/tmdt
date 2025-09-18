@@ -30,7 +30,7 @@ class ShopController extends Controller
                       ->orWhere('description', 'like', $like);
             });
         }
-        $products = $productsQuery->paginate(12)->withQueryString();
+        $products = $productsQuery->paginate(12)->appends(request()->query());
 
         return view('pages.shop', compact('categories', 'brands', 'products', 'q'));
     }
@@ -49,7 +49,7 @@ class ShopController extends Controller
             ->where('category_id', $id)
             ->latest()
             ->paginate(12)
-            ->withQueryString();
+            ->appends(request()->query());
 
         return view('pages.shop', compact('categories', 'brands', 'products'));
     }
@@ -68,9 +68,11 @@ class ShopController extends Controller
             ->where('brand', $brand)
             ->latest()
             ->paginate(12)
-            ->withQueryString();
+            ->appends(request()->query());
 
         return view('pages.shop', compact('categories', 'brands', 'products'));
     }
 }
+
+
 
