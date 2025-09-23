@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/catagory.css') }}">
     <link rel="stylesheet" href="{{ asset('css/aboutus.css') }}">
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/news.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/news.css') }}?v={{ @filemtime(public_path('css/news.css')) }}">
     <link rel="stylesheet" href="{{ asset('css/products.css') }}">
     <link rel="stylesheet" href="{{ asset('css/shop.css') }}">
     <link rel="stylesheet" href="{{ asset('css/detailProducts.css') }}?v={{ @filemtime(public_path('css/detailProducts.css')) }}">
@@ -152,6 +152,8 @@
         </script>
         <script async src="https://dochat.vn/code.js?id=9250829223305513694"></script>
     </footer>
+    {{-- Flash toast (thông báo góc phải) --}}
+    @include('partials.flash_toast')
 </body>
 </html>
 

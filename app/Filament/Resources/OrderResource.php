@@ -37,15 +37,10 @@ class OrderResource extends Resource
                 })
                 ->hiddenOn('create'),
 
-            Forms\Components\Select::make('status')
+            Forms\Components\Placeholder::make('status_display')
                 ->label('Trạng thái')
-                ->options([
-                    'pending' => 'Đang chờ',
-                    'paid' => 'Đã thanh toán',
-                    'completed' => 'Hoàn tất',
-                    'canceled' => 'Hủy',
-                ])
-                ->required(),
+                ->content(fn (?Order $record) => $record?->status)
+                ->hiddenOn('create'),
         ]);
     }
 
@@ -72,14 +67,6 @@ class OrderResource extends Resource
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
-            Tables\Actions\Action::make('confirm')
-                ->label('Confirm')
-                ->color('success')
-                ->requiresConfirmation()
-                ->action(function (Order $record) {
-                    $record->status = 'completed';
-                    $record->save();
-                }),
             Tables\Actions\DeleteAction::make(),
         ])
         ->bulkActions([
@@ -96,4 +83,3 @@ class OrderResource extends Resource
         ];
     }
 }
-

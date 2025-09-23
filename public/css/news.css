@@ -165,3 +165,12 @@
 .main-widget ul li {
     margin-bottom: 8px;
 }
+
+/* Ensure news card images fill the frame on both Home and News (no whitespace) */
+.card .thumbnail img {
+    width: 100% !important;
+    height: 200px !important; /* chỉnh tại đây nếu muốn chiều cao khác */
+    object-fit: cover !important; /* phủ đầy, có thể crop viền để không chừa khoảng trắng */
+    background: #fff;
+    display: block;
+}

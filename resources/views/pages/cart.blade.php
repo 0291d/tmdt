@@ -96,7 +96,7 @@
                     </div>
                     @endif
                     <div style="margin-top:14px;">
-                        <form method="POST" action="{{ route('cart.checkout') }}">
+                        <form method="POST" action="{{ route('payment.vnpay') }}">
                             @csrf
                             <button class="btn-checkout btn btn-primary w-100" type="submit">THANH TOÁN</button>
                         </form>
