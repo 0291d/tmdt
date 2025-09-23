@@ -50,7 +50,7 @@ class PaymentController extends Controller
 
         // Ghi nhận payment pending
         $txnRef = strtoupper(Str::random(10));
-        session(['vnpay_txn_ref' => $txnRef, 'vnpay_total' => $finalTotal]);
+        session(['vnpay_txn_ref' => $txnRef, 'vnpay_total' => $finalTotal, 'payment_user_id' => $user->id]);
         $payment = Payment::create([
             'user_id' => $user->id,
             'order_id' => null,
@@ -121,19 +121,22 @@ class PaymentController extends Controller
 
         $responseCode = (string) ($vnpData['vnp_ResponseCode'] ?? '');
 
-        // Tìm payment theo txn_ref
         $returnedTxnRef = (string) ($vnpData['vnp_TxnRef'] ?? '');
         $payment = Payment::where('txn_ref', $returnedTxnRef)->first();
         if (!$payment) {
-            $amountFromVnp = isset($vnpData['vnp_Amount']) ? (int) floor(((int) $vnpData['vnp_Amount']) / 100) : (int) session('vnpay_total', 0);
-            $payment = Payment::create([
-                'user_id' => auth()->id(),
-                'provider' => 'vnpay',
-                'currency' => 'VND',
-                'amount' => max(0, $amountFromVnp),
-                'txn_ref' => $returnedTxnRef ?: (string) session('vnpay_txn_ref'),
-                'status' => 'pending',
-            ]);
+            $paymentId = session('payment_id');
+            if ($paymentId) {
+                $payment = Payment::find($paymentId);
+            }
+        }
+        if (!$payment) {
+            $sessRef = (string) session('vnpay_txn_ref');
+            if ($sessRef) {
+                $payment = Payment::where('txn_ref', $sessRef)->first();
+            }
+        }
+        if (!$payment) {
+            return redirect()->route('cart.index')->with('error', 'Không tìm thấy giao dịch đã khởi tạo. Vui lòng thực hiện thanh toán lại.');
         }
 
         $payment->response_code = $responseCode;
@@ -209,6 +212,7 @@ class PaymentController extends Controller
         session()->forget('vnpay_txn_ref');
         session()->forget('vnpay_total');
         session()->forget('payment_id');
+        session()->forget('payment_user_id');
 
         return redirect()->route('cart.index')->with('status', 'Thanh toán thành công. Cảm ơn bạn!');
     }
