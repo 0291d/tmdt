@@ -89,7 +89,10 @@ class RegisterController extends Controller
     {
         // Tạo hồ sơ Customer rỗng cho user thường
         if ($user && strcasecmp((string)$user->role, 'admin') !== 0) {
-            Customer::firstOrCreate(['user_id' => $user->id]);
+            Customer::firstOrCreate(['user_id' => $user->id], 
+    ['phone'   => null,
+            'address' => null,]
+        );
         }
         // Sau đăng ký: admin -> /admin, user -> trang chủ
         if ($user && strcasecmp((string)$user->role, 'admin') === 0) {

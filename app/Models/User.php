@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Filament\Models\Contracts\FilamentUser;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     // Người dùng hệ thống: có vai trò (role), có customer profile, orders, comments, wishlists
     use HasApiTokens, HasFactory, Notifiable;
@@ -43,8 +44,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-      // Hồ sơ khách hàng gắn với user
-      public function customer()
+
+    public function canAccessFilament(): bool
+    {
+        return strcasecmp((string) ($this->role ?? ''), 'admin') === 0;
+    }
+
+    // Hồ sơ khách hàng gắn với user
+    public function customer()
     {
         return $this->hasOne(Customer::class);
     }
@@ -67,3 +74,4 @@ class User extends Authenticatable
         return $this->hasMany(Wishlist::class);
     }
 }
+
