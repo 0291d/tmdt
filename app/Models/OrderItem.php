@@ -49,7 +49,6 @@ class OrderItem extends Model
                 $percent = (int) ($order->discount_percent ?? 0);
                 $discount = $percent ? (int) floor($subtotal * $percent / 100) : 0;
                 $final = max(0, (int) $subtotal - $discount);
-                // Update directly to bypass any mutators that block manual assignment
                 $order->newQuery()->whereKey($order->id)->update([
                     'discount_amount' => $discount,
                     'total' => $final,
