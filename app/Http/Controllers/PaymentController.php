@@ -206,7 +206,6 @@ class PaymentController extends Controller
         $payment->paid_at = now();
         $payment->save();
 
-        // Dọn session
         session()->forget('cart');
         session()->forget('coupon');
         session()->forget('vnpay_txn_ref');

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Collection;
 class OrderItem extends Model
 {
     // Dòng sản phẩm trong đơn hàng; booted() tự tính lại tổng tiền đơn
@@ -43,9 +44,11 @@ class OrderItem extends Model
             }
             $order = Order::with('items')->find($item->order_id);
             if ($order) {
-                $subtotal = $order->items->sum(function ($i) {
-                    return (int) $i->quantity * (float) $i->price;
-                });
+                // Tính subtotal trực tiếp ở DB để tránh lỗi kiểu (array/collection)
+                $subtotal = (int) (OrderItem::query()
+                    ->where('order_id', $order->id)
+                    ->selectRaw('COALESCE(SUM(quantity * price), 0) as subtotal')
+                    ->value('subtotal') ?? 0);
                 $percent = (int) ($order->discount_percent ?? 0);
                 $discount = $percent ? (int) floor($subtotal * $percent / 100) : 0;
                 $final = max(0, (int) $subtotal - $discount);
