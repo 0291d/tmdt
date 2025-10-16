@@ -12,6 +12,7 @@ class HomeController extends Controller
     {
         // Trang chủ: lấy id danh mục theo tên để tạo link nhanh ở grid
         $categoryNames = ['Sofa', 'Table', 'Bed', 'Armchair', 'Chair'];
+        // truy vấn danh mục để hiển thị 
         $idsByName = Category::whereIn('name', $categoryNames)->pluck('id', 'name');
 
         // Sản phẩm mới và tin mới để hiển thị slider

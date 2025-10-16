@@ -175,7 +175,6 @@ Route::middleware('auth')->group(function () {
 
 // Payment (VNPAY)
 Route::middleware('auth')->group(function () {
-    // Khởi tạo thanh toán VNPAY từ giỏ hàng
     Route::post('/payment/vnpay', [PaymentController::class, 'vnpayPayment'])->name('payment.vnpay');
 });
 

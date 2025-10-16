@@ -8,6 +8,7 @@
     <div class="container">
         <div class="col1">
             <p>BREW</p>
+            {{-- stroupper: in hoa --}}
             <h1>{{ strtoupper($product->brand ?? '') }}</h1>
             <h1>{{ strtoupper($product->name) }}</h1>
             @if($product->description)

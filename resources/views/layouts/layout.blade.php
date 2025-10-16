@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title', 'Shop')</title>
 
-    {{-- Nạp CSS: framework trước, custom sau để override dễ --}}
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
@@ -61,7 +61,10 @@
                   const btn = document.getElementById('userMenuBtn');
                   const dd = document.getElementById('userDropdown');
                   if(btn && dd){
+                    // stopPropagation nhằm tránh hành động click ra ngoài vẫn thực hiện hàm của btn 
+
                     btn.addEventListener('click', function(e){ e.stopPropagation(); dd.style.display = dd.style.display === 'block' ? 'none' : 'block'; });
+                    //
                     document.addEventListener('click', function(){ dd.style.display = 'none'; });
                   }
                 });

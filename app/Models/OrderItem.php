@@ -31,6 +31,7 @@ class OrderItem extends Model
     protected static function booted(): void
     {
         // Khi tạo item, nếu chưa có price thì lấy từ Product
+        // sử dụng creating đảm bảo sản phẩm luôn gắn với giá nhằm tránh sai sót khi lưu lên db
         static::creating(function (OrderItem $item) {
             if (is_null($item->price) && $item->product_id) {
                 $item->price = Product::whereKey($item->product_id)->value('price');
@@ -45,6 +46,8 @@ class OrderItem extends Model
             $order = Order::with('items')->find($item->order_id);
             if ($order) {
                 // Tính subtotal trực tiếp ở DB để tránh lỗi kiểu (array/collection)
+                //selectraw để chèn sql 
+                // coalesce tránh null ghi lưu vào db
                 $subtotal = (int) (OrderItem::query()
                     ->where('order_id', $order->id)
                     ->selectRaw('COALESCE(SUM(quantity * price), 0) as subtotal')

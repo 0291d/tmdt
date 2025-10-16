@@ -4,7 +4,7 @@
 
 @section('content')
 @php
-    // provided by controller
+    // sử dụng collect() tránh null khi dùng foreach
     $idsByName   = $idsByName   ?? collect();
     $newProducts = $newProducts ?? collect();
     $latestNews  = $latestNews  ?? collect();
@@ -38,7 +38,7 @@
         <img src="{{ asset('img/sofa.jpg') }}" alt="Sofa">
         <span class="label">SOFA</span>
     </a>
-
+    {{-- ? kiểm tra điều kiện !=null != False != 0 != chuỗi rỗng --}}
     <div class="right-grid">
         @php
         $idsByName = $idsByName ?? collect();

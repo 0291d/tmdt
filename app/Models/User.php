@@ -49,7 +49,7 @@ class User extends Authenticatable implements FilamentUser
     {
         return strcasecmp((string) ($this->role ?? ''), 'admin') === 0;
     }
-
+    // quan hệ 
     // Hồ sơ khách hàng gắn với user
     public function customer()
     {
@@ -68,7 +68,7 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(Comment::class);
     }
 
-    // Bản ghi sản phẩm yêu thích của user
+    //  sản phẩm yêu thích của user
     public function wishlists()
     {
         return $this->hasMany(Wishlist::class);

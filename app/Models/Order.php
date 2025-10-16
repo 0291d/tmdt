@@ -33,6 +33,7 @@ class Order extends Model
     }
 
     // Tính và gán tổng từ giỏ hàng + coupon (session)
+    // lưu giá trị vào model để hiện thị các giá trị này ở cart 
     public function fillTotalsFromCart(array $cart, ?array $appliedCoupon): self
     {
         [$subtotal, $percent, $discountAmount, $finalTotal] = self::totalsFromCart($cart, $appliedCoupon);
@@ -42,7 +43,7 @@ class Order extends Model
         return $this;
     }
 
-    // Hàm tiện ích tính toán tổng từ giỏ hàng + coupon
+    // tính toán tổng từ giỏ hàng + coupon
     public static function totalsFromCart(array $cart, ?array $appliedCoupon): array
     {
         $subtotal = 0;

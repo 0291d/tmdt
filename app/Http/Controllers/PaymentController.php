@@ -11,28 +11,32 @@ use App\Models\Coupon;
 use App\Models\Customer;
 use App\Models\Payment;
 use App\Models\User;
-
+// mặc định của vnpay
 class PaymentController extends Controller
 {
     // Khởi tạo thanh toán qua VNPAY từ giỏ hàng trong session và chuyển hướng sang cổng
     public function vnpayPayment(Request $request)
     {
+        // truy cập vào auth lấy user
         $user = auth()->user();
         if (!$user) {
             return redirect()->route('login');
         }
-
+        // mỗi user được tạo sẽ mặc định tạo 1 customer với các trường trống
+        // tìm user với các điều kiện để đảm bảo thanh toán
         $customer = Customer::where('user_id', $user->id)->first();
         if (!$customer || !trim((string) $customer->phone) || !trim((string) $customer->address)) {
             return redirect()->route('user.info')->with('error', 'Bạn cần bổ sung số điện thoại và địa chỉ trước khi thanh toán.');
         }
-
+        // giữ sản phẩm trong session giỏ hàng, nếu chưa thêm mặc định tạo mảng trống
         $cart = session('cart', []);
         if (empty($cart)) {
             return redirect()->route('cart.index')->with('error', 'Giỏ hàng trống.');
         }
 
         // Tính tổng tiền từ giỏ hàng + coupon
+        // ghi nhận coupon người dùng đã chèn vào
+        // mảng chứa biến giá trị cơ bản để xử lý thanh toán 
         $applied = session('coupon');
         [$subtotal, $percent, $discountAmount, $finalTotal] = Order::totalsFromCart($cart, $applied);
         if ($finalTotal <= 0) {
@@ -98,7 +102,6 @@ class PaymentController extends Controller
             return redirect()->route('cart.index')->with('error', 'Thiếu cấu hình VNPAY.');
         }
 
-        // Lấy tham số vnp_*
         $vnpData = [];
         foreach ($request->query() as $key => $value) {
             if (substr((string) $key, 0, 4) === 'vnp_') {
@@ -151,8 +154,7 @@ class PaymentController extends Controller
             $payment->save();
             return redirect()->route('cart.index')->with('error', 'Thanh toán thất bại hoặc bị hủy (mã: ' . $responseCode . ').');
         }
-
-        // Lấy user (ưu tiên phiên, fallback theo payment)
+        // kiểm tra các điều kiện đảm bảo thanh toán
         $user = auth()->user();
         if (!$user && $payment && $payment->user_id) {
             $user = User::find($payment->user_id);
@@ -181,7 +183,7 @@ class PaymentController extends Controller
         ]);
         $order->fillTotalsFromCart($cart, $applied);
         $order->save();
-
+        // với một sản phẩm gắn các thuộc tính của sản phẩm đó vào $it
         foreach ($cart as $it) {
             OrderItem::create([
                 'order_id' => $order->id,
@@ -190,7 +192,7 @@ class PaymentController extends Controller
                 'price' => (int) ($it['price'] ?? 0),
             ]);
         }
-
+        // xử lý coupon 
         if ($applied && isset($applied['id'])) {
             $coupon = Coupon::find($applied['id']);
             if ($coupon && Carbon::parse($coupon->expiry_date)->isFuture() && $coupon->used_count < $coupon->max_uses) {

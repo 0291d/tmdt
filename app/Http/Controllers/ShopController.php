@@ -8,7 +8,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        // Trang shop tổng: có tham số q để tìm kiếm theo name/brand/description
+        // Trang shop tổng: có tham số q để tìm kiếm theo brand
         $q = request('q');
 
         $categories = Category::withCount('products')->get();
@@ -49,6 +49,7 @@ class ShopController extends Controller
             ->where('category_id', $id)
             ->latest()
             ->paginate(12)
+            // giữ nguyên điều kiện lọc khi chuyển trang 
             ->appends(request()->query());
 
         return view('pages.shop', compact('categories', 'brands', 'products'));
