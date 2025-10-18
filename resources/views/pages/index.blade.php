@@ -4,13 +4,13 @@
 
 @section('content')
 @php
-    // sử dụng collect() tránh null khi dùng foreach
+    // sử dụng collect() tránh null khi foreach
     $idsByName   = $idsByName   ?? collect();
     $newProducts = $newProducts ?? collect();
     $latestNews  = $latestNews  ?? collect();
 @endphp
 
-{{-- Banner trang chủ: slider nền dùng ảnh trong public/img và bum.js điều khiển --}}
+{{-- Banner trang chủ: slider nền dùng ảnh trong public/img và bum.js --}}
 <section class="banner">
     <div class="banner-slides">
         <div class="banner-slide"><img src="{{ asset('img/slide1.jpg') }}" alt=""></div>
@@ -20,7 +20,9 @@
         <div class="banner-slide"><img src="{{ asset('img/vq.jpg') }}" alt=""></div>
         <div class="banner-slide"><img src="{{ asset('img/vw.jpg') }}" alt=""></div>
     </div>
+    {{-- đối tượng thao tác với js --}}
     <div class="banner-indicators"></div>
+    {{-- khả năng mở rộng của dự án nếu cần thêm content vào banner-slide --}}
     @yield('home-banner-extra')
 
 </section>
@@ -74,7 +76,7 @@
     </div>
 </section>
 
-{{-- Sản phẩm mới: slider ngang, ảnh lấy ảnh chính nếu có --}}
+{{-- Sản phẩm mới: slider ngang, lấy ảnh chính  --}}
 <section class="product-section">
     <div class="section-header">
         <h2>NEW ARRIVALS</h2>
@@ -89,6 +91,7 @@
                         $image = ($p->images->where('is_main', true)->first() ?? $p->images->first());
                         $src = $image ? $image->url : asset('img/placeholder.png');
                     @endphp
+                    {{-- hiển thị product card --}}
                     <div class="product-card">
                         <a href="{{ route('product.show', $p) }}" class="product">
                             <img src="{{ $src }}" alt="{{ $p->name }}">
@@ -145,6 +148,7 @@
  <script>
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.product-section .slider-container').forEach(function (container) {
+    // tìm phần tử html 1st của class
     const wrapper = container.querySelector('.slider-wrapper');
     const prev = container.querySelector('.slider-btn.prev');
     const next = container.querySelector('.slider-btn.next');

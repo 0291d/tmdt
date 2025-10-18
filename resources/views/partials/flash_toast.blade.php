@@ -41,7 +41,7 @@
     @endforeach
   </div>
   <script>
-    // Tự đóng sau 4s, giống trải nghiệm toast của admin
+    // Tự đóng sau 4s
     (function(){
       const stack = document.getElementById('toast-stack');
       if(!stack) return;
@@ -50,7 +50,7 @@
         const t = setTimeout(() => {
           el.style.animation = 'toastOut .2s ease-in forwards';
           setTimeout(() => el.remove(), 220);
-        }, 4000 + idx*300); // so le nhe neu co nhieu toast
+        }, 4000 + idx*300); // cộng đồn thời gian cho mỗi toast xuất hiện sau 
       });
     })();
   </script>

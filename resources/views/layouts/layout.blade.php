@@ -107,7 +107,6 @@
         </nav>
     </section>
 
-    <!-- Ná»™i dung -->
     {{-- Nội dung từng trang --}}@yield('content')
 
     {{-- Footer + popup thông tin nhóm --}}
@@ -138,7 +137,6 @@
                     <li>2354800195 - Lương thế cường</li>
                     <li>2354800017 - Đặng gia bảo</li>
                     <li>2354800176 - Nguyễn văn hoàng</li>
-                    <li>2354800243 - Nguyễn quốc vương</li>
                 </ul>
             </div>
         </div>

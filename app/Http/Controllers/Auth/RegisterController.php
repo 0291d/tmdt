@@ -78,7 +78,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'user', // mặc định không phải admin
+            'role' => 'user', // mặc định user
         ]);
     }
 
@@ -87,7 +87,7 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
-        // Tạo hồ sơ Customer rỗng cho user thường
+        // Tạo hồ sơ Customer rỗng cho user 
         if ($user && strcasecmp((string)$user->role, 'admin') !== 0) {
             Customer::firstOrCreate(['user_id' => $user->id], 
     ['phone'   => null,

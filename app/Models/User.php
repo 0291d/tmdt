@@ -44,7 +44,8 @@ class User extends Authenticatable implements FilamentUser
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    // tránh nhập url /admin dù role là user 
+    // nếu role = admin cho phép truy cập filament
     public function canAccessFilament(): bool
     {
         return strcasecmp((string) ($this->role ?? ''), 'admin') === 0;
